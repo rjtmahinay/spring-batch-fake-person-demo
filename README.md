@@ -45,7 +45,7 @@ mysql -uroot -p
 
 * After logging in you can now do SQL operations.
 
-### Spring Batch Application
+# Running the application
 
 * Fork this project
 * Go to the project directory
