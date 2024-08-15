@@ -3,6 +3,7 @@
 This is a code demonstration of Spring Batch using a fake person data from [Java Faker](https://github.com/DiUS/java-faker). The demonstration was done during
 the meetup event of [Java User Group Philippines](https://linktr.ee/jugph), [Data Engineering Pilipinas](https://www.meetup.com/data-engineering-pilipinas/), and [Manila Apache Kafka](https://www.meetup.com/Manila-Kafka/).
 
+The presentation can be access here: [Spring Batch Fake Person Demo Slides](https://github.com/rjtmahinay/presentations/blob/main/pdf/Spring_Batch_Fake_Person_Demo.pdf)
 ## Prerequisites
 
 The application needs a database to store the data. You may opt to manually install a MySQL Database or use the container approach using Podman Desktop.
