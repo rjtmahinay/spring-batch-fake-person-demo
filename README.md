@@ -59,6 +59,9 @@ mysql -uroot -p
 
 ```mysql
 
+-- Execute this if you aren't in the DEMO schema
+USE demo;
+
 -- Retrieve all person data
 SELECT * FROM PERSON;
 
