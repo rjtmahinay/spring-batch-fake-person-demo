@@ -14,10 +14,12 @@ The application needs a database to store the data. You may opt to manually inst
 * [Podman Desktop](https://podman-desktop.io/docs/installation)
 
 
-### MySQL via Local Installation
+### MySQL via Manual Installation
 
 Make sure you will use Port 3308 or replace the JDBC URL in the application.yml
 
+* Start your MySQL Database
+* Create an instance
 * Go to src/main/resources/application.yml
 * Edit the following property below
 ```yaml
@@ -66,11 +68,11 @@ mysql -uroot -p
 
 * After logging in you can now do SQL operations.
 
-# Running the application
+## Running the application
 
 * Open your Linux Terminal, Powershell or Git Bash Terminal
 * Change directory to this project directory
-* Run the following commands below:
+* Run the following commands below
 
 <i>Run the Spring Batch Application</i>
 ```shell
