@@ -6,12 +6,33 @@ the meetup event of [Java User Group Philippines](https://linktr.ee/jugph), [Dat
 The presentation can be access here: [Spring Batch Fake Person Demo Slides](https://github.com/rjtmahinay/presentations/blob/main/pdf/Spring_Batch_Fake_Person_Demo.pdf)
 ## Prerequisites
 
+* Fork this project
+
 The application needs a database to store the data. You may opt to manually install a MySQL Database or use the container approach using Podman Desktop.
 
 * [MySQL Database - Manual Install](https://dev.mysql.com/doc/mysql-installer/en/)
 * [Podman Desktop](https://podman-desktop.io/docs/installation)
 
-### MySQL via Podman Desktop
+
+### MySQL via Local Installation
+
+Make sure you will use Port 3308 or replace the JDBC URL in the application.yml
+
+* Go to src/main/resources/application.yml
+* Edit the following property below
+```yaml
+
+# Replace the JDBC port from 3308 to 3306.
+
+# Change this
+url: jdbc:mysql://localhost:3308/demo?createDatabaseIfNotExist=true
+
+# To this
+url: jdbc:mysql://localhost:3306/demo?createDatabaseIfNotExist=true
+```
+
+
+### MySQL via Podman Desktop (Preferred)
 
 After installation of Podman Desktop, perform the following commands:
 
@@ -47,8 +68,8 @@ mysql -uroot -p
 
 # Running the application
 
-* Fork this project
-* Go to the project directory
+* Open your Linux Terminal, Powershell or Git Bash Terminal
+* Change directory to this project directory
 * Run the following commands below:
 
 <i>Run the Spring Batch Application</i>
