@@ -8,7 +8,7 @@ spring:
   datasource:
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
-    url: jdbc:mysql://localhost:3306/demo
+    url: jdbc:mysql://localhost:3308/demo?createDatabaseIfNotExist=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-timeout: 60000
@@ -18,11 +18,10 @@ spring:
   sql:
     init:
       schema-locations:
+        - "demo-schema.sql"
         - "classpath:org/springframework/batch/core/schema-drop-mysql.sql"
         - "classpath:org/springframework/batch/core/schema-mysql.sql"
-        - "schema.sql"
       mode: always
-
 
 person:
   batch:
