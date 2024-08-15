@@ -1,0 +1,30 @@
+spring:
+  batch:
+    jdbc:
+      initialize-schema: never
+      isolation-level-for-create: serializable
+    job:
+      enabled: false
+  datasource:
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    url: jdbc:mysql://localhost:3306/demo
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 60000
+      max-lifetime: 180000
+  config:
+    import: "file:./config/env_vars.properties"
+  sql:
+    init:
+      schema-locations:
+        - "classpath:org/springframework/batch/core/schema-drop-mysql.sql"
+        - "classpath:org/springframework/batch/core/schema-mysql.sql"
+        - "schema.sql"
+      mode: always
+
+
+person:
+  batch:
+    data-file-path: "./data/fake_person_data_500k.csv"
+    chunk-size: 20000
