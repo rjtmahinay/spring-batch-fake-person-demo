@@ -39,9 +39,19 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 import java.util.concurrent.Executors;
 
+/**
+ * Configures the Batch Job and its components. Methods with {@link Bean} are injected in the Spring Container.
+ */
 @Configuration
 public class BatchConfiguration {
 
+    /**
+     * Concrete implementation of {@link org.springframework.batch.item.ItemReader}.
+     *
+     * This reads a flat file and maps the data to a {@link Person} object.
+     * @param personBatchProperties Contains properties from application.yml file
+     * @return configured instance of {@link FlatFileItemReader}
+     */
     @Bean
     FlatFileItemReader<Person> personFlatFileItemReader(PersonBatchProperties personBatchProperties) {
         final String[] dataNames = {"firstName", "lastName", "city", "buildingNumber", "streetName"};
@@ -56,6 +66,15 @@ public class BatchConfiguration {
                 .build();
 
     }
+
+    /**
+     * Concrete implementation of {@link org.springframework.batch.item.ItemWriter}.
+     *
+     * Writes data to the database.
+     *
+     * @param dataSource Connection to the database
+     * @return configured instance of {@link JdbcBatchItemWriter}
+     */
     @Bean
     JdbcBatchItemWriter<Person> personJdbcBatchItemWriter(DataSource dataSource) {
         return new JdbcBatchItemWriterBuilder<Person>()
@@ -65,11 +84,32 @@ public class BatchConfiguration {
                 .build();
     }
 
+    /**
+     * Spawns a virtual thread for each task.
+     * @return configured instance of {@link AsyncTaskExecutor}
+     */
     @Bean
     AsyncTaskExecutor asyncTaskExecutor() {
         return new TaskExecutorAdapter(Executors.newVirtualThreadPerTaskExecutor());
     }
 
+    /**
+     * A sequential step to perform batch operations using the Person Data. This is responsible in invoking
+     * the reading and writing from flat file to the database.
+     *
+     * This step is a chunk-based operation, meaning it reads and processes data in chunks.
+     *
+     * @param jobRepository Stores the Job metadata
+     * @param platformTransactionManager Handles the transaction management of job repository and the database
+     * @param personFlatFileItemReader Reads data from the flat file
+     * @param personJdbcBatchItemWriter Writes data to the database
+     * @param asyncTaskExecutor Spawns a virtual thread for each task
+     * @param stepListener Listens to the step events and logs them
+     * @param chunkListener Listens to the chunk events and logs them
+     * @param personBatchProperties Contains properties from application.yml file
+     *
+     * @return configured instance of {@link Step} which will be passed to {@link Job} instance
+     */
     @Bean
     Step personDataStep(JobRepository jobRepository, PlatformTransactionManager platformTransactionManager,
                         FlatFileItemReader<Person> personFlatFileItemReader,
@@ -88,6 +128,15 @@ public class BatchConfiguration {
                 .build();
     }
 
+    /**
+     * Abstracts a single job. This is responsible in invoking a single or multiple steps.
+     *
+     * @param jobRepository Stores the Job metadata
+     * @param jobListener Listens to the job events and logs them
+     *
+     * @return configured instance of {@link Job} which will be passed to the Spring Container. This will be invoked
+     * in {@link com.rjtmahinay.batch.SpringBatchMeetupDemoApplication}
+     */
     @Bean
     Job personDataJob(JobRepository jobRepository, Step personDataStep, JobListener jobListener) {
         return new JobBuilder("personDataJob", jobRepository)

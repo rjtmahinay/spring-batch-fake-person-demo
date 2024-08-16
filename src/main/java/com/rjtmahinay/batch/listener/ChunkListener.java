@@ -18,6 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.stereotype.Component;
 
+/**
+ * Listener for Chunk events.
+ *
+ */
 @Component
 @Slf4j
 public class ChunkListener implements org.springframework.batch.core.ChunkListener {

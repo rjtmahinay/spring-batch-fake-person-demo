@@ -20,6 +20,10 @@ import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * Listens to Job events.
+ *
+ */
 @Component
 @Slf4j
 public class JobListener implements JobExecutionListener {

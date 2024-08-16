@@ -12,6 +12,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * Main entry point of a Spring Batch Application.
+ *
+ * <ul>
+ *     <li>{@link SpringBootApplication} abstracts the configuration to manage
+ *     Java objects and its dependencies. This annotation manage the objects in the Spring Container.</li>
+ *     <li>{@link Slf4j} abstracts the logging configuration. This application will default in using Logback
+ *     logging.</li>
+ *     <li>{@link RequiredArgsConstructor} generates and inject automatically the fields with final specifier inside
+ *     a constructor.</li>
+ * </ul>
+ */
 @SpringBootApplication
 @Slf4j
 @RequiredArgsConstructor
@@ -24,6 +36,15 @@ public class SpringBatchMeetupDemoApplication {
       SpringApplication.exit(SpringApplication.run(SpringBatchMeetupDemoApplication.class, args));
     }
 
+    /**
+     * This is an abstraction of a Command Line Interface.
+     *
+     * This method will be executed after the Spring Container is initialized.
+     * It will launch the job with the specified parameters.
+     *
+     * @return An instance of {@link CommandLineRunner} including the job parameters and execution needed to execute
+     * a {@link Job}.
+     */
     @Bean
     CommandLineRunner commandLineRunner() {
         return args -> {

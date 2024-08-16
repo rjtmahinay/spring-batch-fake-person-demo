@@ -18,6 +18,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * A data-carrier object to represent a person. This is used to map data from a flat file.
+ */
 @NoArgsConstructor
 @Getter
 @Setter

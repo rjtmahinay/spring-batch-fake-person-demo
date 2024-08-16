@@ -21,6 +21,9 @@ import org.springframework.context.annotation.Configuration;
 
 import java.nio.file.Path;
 
+/**
+ * Configures a custom Person properties inside the Spring Container. Visit application.yml to see the values.
+ */
 @Configuration
 @ConfigurationProperties(prefix = "person.batch")
 @Getter
