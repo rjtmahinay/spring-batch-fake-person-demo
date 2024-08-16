@@ -28,7 +28,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class JobListener implements JobExecutionListener {
 
-    long startTime;
+    private long startTime;
+
     @Override
     public void beforeJob(JobExecution jobExecution) {
         log.info("Job started: {}", jobExecution.getStartTime());
